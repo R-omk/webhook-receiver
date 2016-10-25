@@ -1,0 +1,33 @@
+{
+    "scripts": [
+        {
+            "command": "echo",
+            "args": [
+            "{{ref}}",
+            "{{event_name}}",
+            "{{project.web_url}}"
+            ]
+        },
+        {
+            "command": "echo",
+            "args": [
+            "{{POST}}"
+            ]
+        },
+        {
+            "comment": "some trigger something",
+            "command": "trigg",
+            "args": [
+                "--eq", "{{ref}}", "master",
+                "--eq", "{{object_kind}}", "build",
+                "--eq", "{{build_status}}", "success",
+                "--match", "(/repo-related1|/repo-related2).git$", "{{repository.git_ssh_url}}",
+                "--trigger-token", "a57b5a744807b7c9d6567423e12f",
+                "--trigger-url", "https://mygitlab/api/v3/projects/59/trigger/builds",
+                "--var", "MYVAR1", "some var content",
+                "--var", "MYVAR2", "content 2"
+            ]
+        },
+
+    ]
+}
